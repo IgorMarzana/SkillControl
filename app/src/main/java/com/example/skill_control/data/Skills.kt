@@ -4,9 +4,11 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 
-data class Skills(val id: Int, val nombre: String,var nivel: Int)
+data class Skills(val id: Int, val nombre: String, var nivel: Int)
 
-object RepositorioSkills{
+object RepositorioSkills {
+
+    val cantidadNiveles = 10
 
     val listaHabilidades = mutableStateListOf(
 
@@ -17,11 +19,11 @@ object RepositorioSkills{
 
     )
 
-    fun dameNombreHabilidad(id: Int): String?{
+    fun dameNombreHabilidad(id: Int): String? {
 
         listaHabilidades.forEach {
 
-            if(it.id == id){
+            if (it.id == id) {
 
                 return it.nombre
 
@@ -33,21 +35,19 @@ object RepositorioSkills{
 
     }
 
-    fun estableceNivel(id: Int, nivel: Int){
+    fun estableceNivel(id: Int, nivel: Int) {
 
-        listaHabilidades.forEachIndexed   { indice, skills ->
+        listaHabilidades.forEachIndexed { indice, skills ->
 
-            if(skills.id == id ){
+            if (skills.id == id) {
 
                 listaHabilidades[indice] = Skills(id, skills.nombre, nivel)
 
             }
 
         }
-        
+
     }
-
-
 
 
 }
