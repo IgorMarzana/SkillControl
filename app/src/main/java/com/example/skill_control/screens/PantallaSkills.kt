@@ -1,8 +1,10 @@
 package com.example.skill_control.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -22,13 +24,19 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.skill_control.data.RepositorioSkills
 
+@OptIn(ExperimentalFoundationApi::class)
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun PantallaSkills(navegador: NavController) {
 
-    BoxWithConstraints(Modifier
-        .fillMaxSize()
-        .padding(20.dp)) {
+    BoxWithConstraints(
+        Modifier
+            .fillMaxSize()
+            .padding(20.dp)
+            .combinedClickable(onLongClick = {
+                navegador.navigate("estadisticas")
+            }, onClick = {})
+    ) {
 
         val anchoPantalla = maxWidth.value.toInt()
         val altoPantalla = maxHeight.value.toInt()
@@ -48,9 +56,9 @@ fun PantallaSkills(navegador: NavController) {
                             Modifier
                                 .size(anchoCasilla.dp, altoCasilla.dp)
                                 .padding(1.dp)
-                                .background(if(skills.nivel>=(indice+1)) Color.Cyan else Color.Gray)
+                                .background(if (skills.nivel >= (indice + 1)) Color.Cyan else Color.Gray)
                                 .clickable(onClick = {
-                                    RepositorioSkills.estableceNivel(skills.id, (indice+1))
+                                    RepositorioSkills.estableceNivel(skills.id, (indice + 1))
                                 })
                         )
 
